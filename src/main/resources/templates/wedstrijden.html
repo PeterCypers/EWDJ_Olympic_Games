@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Wedstrijden</title>
+<link th:href="@{/favicon/paris2024 picture.ico}" rel="icon" type="image/x-icon">
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<div th:class="mainContainer">
+	<!-- Logout knop & minimale user details-->
+		<div class="floatRight">
+		<p th:text="|Hallo ${username}|"></p>
+		 <p th:text="|${role}|"></p> 
+			<form th:action="@{/logout}" method="post">
+				<input class="firstBtn" type="submit" value="Logout" th:value="|#{button.logout}|"/>
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+			</form>
+			<!-- keer terug naar sport overzicht -->
+			<p class="marginTop">Keer terug naar Sport overzicht:</p>
+			<form th:action="@{/sports}" method="get">
+				<input class="firstBtn" type="submit" value="Keer Terug"/>
+			</form>
+		</div>
+		
+		
+		<h1 th:class="title1" th:text="|${sportName}-Wedstrijden|">Wedstrijden</h1>
+		
+		<!-- redirect attr. vanuit TicketKopenController -->
+		<p th:if="${aantalGekocht}" class="msg msgshorter" th:text="|Je hebt ${aantalGekocht} tickets gekocht !|"> </p>
+		
+		<th:block th:each="wedstrijd,iter: ${wedstrijdList}">
+		    <div class="wedstrijdContainer">
+			<h2 th:text="${wedstrijd.stadium_naam}"></h2>
+			 <p th:with="df=#{date.format.pattern}" th:text="|Datum & uur: ${#temporals.format(wedstrijd.startDatum,df)} ( ${wedstrijd.startTijd} )|"></p>
+			 <p th:text="|Vrije plaatsen: ${wedstrijd.aantal_plaatsen}|"></p>
+			<p th:if="${wedstrijd.aantal_plaatsen > 0 or role == 'ROLE_ADMIN'}" th:text="|Ticket prijs: ${'&euro;'}${#numbers.formatDecimal(wedstrijd.ticketPrijs, 1, 'DEFAULT', 2, 'DEFAULT')}|"></p>
+			<p th:unless="${wedstrijd.discipline1 == null or wedstrijd.discipline1 == ''}" th:text="|Discipline 1: ${wedstrijd.discipline1}|"></p>
+			<p th:unless="${wedstrijd.discipline2 == null or wedstrijd.discipline2 == ''}" th:text="|Discipline 2: ${wedstrijd.discipline2}|"></p>
+			<p th:unless="${ticketsPerWedstrijdId.get(wedstrijd.wedstrijdId) == 0}" th:text="|Aantal gekochte tickets: ${ticketsPerWedstrijdId.get(wedstrijd.wedstrijdId)}|"></p>
+			<th:block class="marginTop" th:unless="${ticketsPerWedstrijdId.get(wedstrijd.wedstrijdId) >= 20 or role == 'ROLE_ADMIN' or wedstrijd.aantal_plaatsen == 0}">
+				<!-- <p class="marginTop">Tickets kopen:</p> -->
+				<form th:action="@{'/koopTickets/' + ${wedstrijd.wedstrijdId}}" method="get">
+					<input class="firstBtn" type="submit" value="Tickets kopen"/>
+				</form>
+			</th:block>
+			</div>
+		</th:block>
+
+	<div th:switch="|${role}|">
+<!-- 	    <span th:case="ROLE_USER">Logged in as user</span>
+	    <span th:case="ROLE_ADMIN">Logged in as admin</span>
+	    <span th:case="*">Should never happen, but who knows...</span> -->
+	    <th:block th:case="ROLE_ADMIN">
+	    	<form th:action="@{'/toevoegenWedstrijd/' + ${sportName}}" method="get">
+				<input class="firstBtn" type="submit" value="Wedstrijd toevoegen"/>
+			</form>
+	    </th:block>
+	    
+	</div>
+	</div>
+</body>
+</html>

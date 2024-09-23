@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title th:text="#{acces.denied.page}"></title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link th:href="@{/favicon/paris2024 picture.ico}" rel="icon" type="image/x-icon">
+</head>
+<body>
+	<header>
+		
+	</header>
+	<div id="container403">
+		<h1 class="title1">HTTP Status 403 - Access is denied</h1>
+	
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Logout" />
+			<p th:text="${user}"></p> 
+			<p th:text="${userRole}"></p>
+			<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+		</form>
+	</div>
+</body>
+</html>

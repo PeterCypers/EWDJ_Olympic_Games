@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Tickets kopen</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link th:href="@{/favicon/paris2024 picture.ico}" rel="icon" type="image/x-icon">
+</head>
+<body>
+	<div th:class="mainContainer">
+		<!-- Logout knop & minimale user details-->
+		<div class="floatRight">
+		<p th:text="|Hallo ${username}|"></p>
+		 <p th:text="|${role}|"></p> 
+			<form th:action="@{/logout}" method="post">
+				<input class="firstBtn" type="submit" value="Logout" th:value="|#{button.logout}|"/>
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+			</form>
+			
+			<!-- simple keer terug naar wedstrijden -->
+			<p>Keer terug naar wedstrijd overzicht:</p>
+			<a th:href="|/wedstrijden/${sportName}|">
+				<button class="firstBtn">Wedstrijd Overzicht</button>
+			</a>
+		</div>
+		<h1 th:class="title1" th:text="|Tickets kopen voor event: ${stadiumNaam}|"></h1>
+		
+		<!-- tickets kopen form  -->
+		<form th:action="@{'/koopTickets/' + ${wedsId}}" th:object="${ticket}" method="post">
+			<!-- <p th:text="|controle: *{ticketsInAankoop} *{aantalTickets}|"></p> -->
+			<p>
+				<label>Aantal tickets:</label> <input type="number" th:field="*{ticketsInAankoop}" size="20"> 
+				<span th:if="${#fields.hasErrors('ticketsInAankoop')}" th:errorclass="error" th:errors="*{ticketsInAankoop}"></span>
+			</p>
+			<!-- reeds gekochte tickets moet een field zijn voor de validation maar onzichtbaar -->
+			<p class="hidden">
+				<input type="number" th:field="*{aantalTickets}" size="20" th:readonly="true"> 
+			</p>
+			<p th:if="*{aantalTickets > 0}"  th:text="|Reeds gekochte tickets voor deze wedstrijd: *{aantalTickets}|"></p>
+			<p th:text="|Je hebt in totaal ${ticketTotal}/100 tickets.|"></p>
+			<p>
+				<button class="firstBtn" type="submit">Aankoop Bevestigen</button>
+			</p>
+		</form>
+		
+		</div>
+
+</body>
+</html>

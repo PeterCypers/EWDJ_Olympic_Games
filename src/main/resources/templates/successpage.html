@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Succes!</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link th:href="@{/favicon/paris2024 picture.ico}" rel="icon" type="image/x-icon">
+</head>
+<body>
+	<div th:class="mainContainer">
+		<!-- Logout knop & minimale user details-->
+		<div class="floatRight">
+		<p th:text="|Hallo ${username}|"></p>
+		 <p th:text="|${role}|"></p> 
+			<form th:action="@{/logout}" method="post">
+				<input class="firstBtn" type="submit" value="Logout" th:value="|#{button.logout}|"/>
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+			</form>
+		</div>
+		
+		<h1 th:class="title1">Wedstrijd Succesvol Toegevoegd !</h1>
+		
+		<!-- simple keer terug naar wedstrijden -->
+		<p>Keer terug naar wedstrijd overzicht:</p>
+		<a th:href="|/wedstrijden/${sportName}|">
+			<button class="firstBtn">Wedstrijd Overzicht</button>
+		</a>
+		
+	</div>
+</body>
+</html>

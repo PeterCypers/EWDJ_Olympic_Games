@@ -1,0 +1,141 @@
+body{
+    	background: linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 1) 0%,
+        rgba(255, 154, 0, 1) 20%,
+        rgba(208, 222, 33, 1) 40%,
+        rgba(79, 220, 74, 1) 60%,
+        rgba(63, 218, 216, 1) 80%,
+        rgba(47, 201, 226, 1) 100%
+    );
+}
+.title1{
+	padding-top: 10px;
+	text-decoration: underline;
+}
+.mainContainer{
+	background-color: lightblue;
+	padding: 0px 20px 20px 20px;
+	max-width: 80%;
+	min-width: 610px;
+	min-height: 200px;
+}
+
+.sportsImg{
+	max-width: 200px;
+}
+.floatRight{
+	float: right;
+}
+.error {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+.errorlesspadding{
+	padding: 5px;
+	margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+.msg {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+}
+.msgshorter{
+	max-width: 450px;
+	background-color: mediumaquamarine;
+	border-radius: 15px;
+	/* color: green; */
+	color: linen;
+	font-size: larger;
+}
+
+#login-box {
+    width: 370px;
+    padding: 20px;
+    margin: 100px auto;
+    background: lightcyan;
+    border-radius: 45px;
+    border: 1px solid #000;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    			rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+
+.firstBtn{
+    border: 0;
+    /* line-height: 2.5; */
+    padding: 0 6px;
+    /* font-size: 1.5rem; */
+    /* text-align: center; */
+    /* color: #fff; */
+    /* text-shadow: 1px 1px 1px #000; */
+    border-radius: 10px;
+    background-color: rgb(222, 229, 220);
+    height: 30px;
+    background-image: linear-gradient(to top left,
+                                    rgba(0, 0, 0, .2),
+                                    rgba(0, 0, 0, .2) 30%,
+                                    rgba(0, 0, 0, 0));
+    box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+                inset -2px -2px 3px rgba(0, 0, 0, .6);
+}
+.firstBtn:hover {
+    background-color: rgb(186, 235, 172);
+}
+.firstBtn:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+                inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+#container403 {
+	background-color: lightblue;
+	padding: 0px 20px 20px 20px;
+	max-width: 40%;
+}
+#ticketbtn,
+#returnbtn{
+	margin-top: 15px;
+}
+.wedstrijdContainer{
+	padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    color: #31708f;
+    background-color: #d9edf7;
+    border-color: #bce8f1;
+    max-width: 450px;
+}
+table{
+	font-size: 1.4em;
+	/*border-collapse: collapse;*/
+}
+th,td{
+	padding: 5px;
+}
+.tdCenterText{
+	text-align: center;
+}
+
+.tdRevert{
+	/*border: revert;*/
+}
+.hidden{
+	display: none;
+}
+.explicitMargin{
+	margin-top: 1em;
+	margin-bottom: 1em;
+}

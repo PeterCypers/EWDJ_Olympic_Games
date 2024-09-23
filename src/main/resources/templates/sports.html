@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title th:text="#{titleSports}">Olympische Spelen</title>
+<link th:href="@{/favicon/paris2024 picture.ico}" rel="icon" type="image/x-icon">
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+	<div th:class="mainContainer">
+		<h1 th:class="title1" th:text="#{mainheader}">Olympische Spelen Parijs 2024</h1>
+		<!-- Logout knop & user details-->
+		<div class="floatRight">
+		<p th:text="|#{hellomsg} ${username}|"></p>
+		 <p th:text="|Id: ${userId} - ${role}|"></p> 
+		 <p th:with="df=#{date.format.pattern}" th:text="|#{datetoday}: ${#temporals.format(todayLocalDate, df)}|"></p>
+		 <p th:text="|Locale: ${#locale}|"></p>
+			<form th:action="@{/logout}" method="post">
+				<input class="firstBtn" type="submit" value="Logout" th:value="|#{button.logout}|"/>
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+			</form>
+			
+			<!-- bekijk tickets knop ticketTotal: 0=falsy, >0=truthy  -->
+			<form th:if="${ticketTotal}" th:action="@{/tickets}" method="post">
+				<input type="hidden" name="userId" th:value="${userId}" />
+				<input id="ticketbtn" class="firstBtn" type="submit" th:value="|#{button.showTickets}|" />
+			</form>
+
+			<!-- setlocale EN knop -->
+			<p th:text="|#{changeLanguage.message}|"></p>
+		    <form action="/changeLocale" method="get">
+		        <button class="firstBtn" type="submit">Set to English</button>
+		    </form>
+		</div>
+		<div>
+			<h2 th:text="#{sport.football}"></h2>
+			<img th:class="sportsImg" th:src="${sport1.image}" /><br>
+			<a th:href="|/wedstrijden/${sport1.naam}|" th:text="#{linkto.competitions}">Bekijk Wedstrijden</a>
+		</div>
+		<div>
+			<h2 th:text="#{sport.netsports}"></h2>
+			<img th:class="sportsImg" th:src="${sport2.image}" /><br>
+			<a th:href="|/wedstrijden/${sport2.naam}|" th:text="#{linkto.competitions}">Bekijk Wedstrijden</a>
+		</div>
+		<div>
+			<h2 th:text="#{sport.sprinting}"></h2>
+			<img th:class="sportsImg" th:src="${sport3.image}" /><br>
+			<a th:href="|/wedstrijden/${sport3.naam}|" th:text="#{linkto.competitions}">Bekijk Wedstrijden</a>
+		</div> 
+		<div>
+			<h2 th:text="#{sport.athleticsThrowing}"></h2>
+			<img th:class="sportsImg" th:src="${sport4.image}" /><br>
+			<a th:href="|/wedstrijden/${sport4.naam}|" th:text="#{linkto.competitions}">Bekijk Wedstrijden</a>
+		</div>
+		<div>
+			<h2 th:text="#{sport.swimming}"></h2>
+			<img th:class="sportsImg" th:src="${sport5.image}" /><br>
+			<a th:href="|/wedstrijden/${sport5.naam}|" th:text="#{linkto.competitions}">Bekijk Wedstrijden</a>
+		</div>
+	</div>
+</body>
+</html>

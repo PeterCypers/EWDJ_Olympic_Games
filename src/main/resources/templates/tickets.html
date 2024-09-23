@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Bekijk Gekochte Tickets</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link th:href="@{/favicon/paris2024 picture.ico}" rel="icon" type="image/x-icon">
+</head>
+<body>
+	<div th:class="mainContainer">
+		<!-- Logout knop & minimale user details-->
+		<div class="floatRight">
+		<p th:text="|Hallo ${username}|"></p>
+		 <p th:text="|${role}|"></p> 
+			<form th:action="@{/logout}" method="post">
+				<input class="firstBtn" type="submit" value="Logout" th:value="|#{button.logout}|"/>
+				<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+			</form>
+			<!-- keer terug naar sport overzicht -->
+			<p class="marginTop">Keer terug naar Sport overzicht:</p>
+			<form th:action="@{/sports}" method="get">
+				<input class="firstBtn" type="submit" value="Keer Terug"/>
+			</form>
+		</div>
+		<h1 th:class="title1">Tickets</h1>
+    	<table border="1">
+        <thead>
+            <tr>
+            	<th>Sport</th>
+                <th>Datum</th>
+                <th>Start Tijd</th>
+                <th>Stadium</th>
+                <th>Aantal Tickets</th>
+                <!-- uitbreiding mogelijk -->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Iterate over the list of TicketDetailsDTO -->
+            <tr th:each="ticketDetails : ${tickDetDTOList}">
+                <!-- Access properties of TicketDetailsDTO -->
+                <td th:text="${ticketDetails.sport.naam}"></td>
+                <td th:with="df=#{date.format.pattern}" th:text="|${#temporals.format(ticketDetails.wedstrijd.startDatum, df)}|"></td>
+                <td class="tdCenterText" th:text="${ticketDetails.wedstrijd.startTijd}"></td>
+                <td th:text="${ticketDetails.wedstrijd.stadium_naam}"></td>
+				<td class="tdCenterText" th:text="${ticketDetails.ticket.aantalTickets}"></td>
+                <!-- uitbreiding mogelijk -->
+            </tr>
+            <tr>
+            	<td colspan="4" class="tdRevert"></td>
+            	<td class="tdCenterText" th:text="|${totalTickets}/100|"></td>
+            </tr>
+        </tbody>
+    </table>
+	</div>
+</body>
+</html>

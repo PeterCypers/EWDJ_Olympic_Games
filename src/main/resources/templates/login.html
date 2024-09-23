@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Login Pagina</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+<link th:href="@{/favicon/paris2024 picture.ico}" rel="icon" type="image/x-icon">
+</head>
+<body onload='document.loginForm.username.focus();'>
+	<div th:class="mainContainer">
+	<h1 th:class="title1">Olympische Spelen Parijs 2024</h1>
+
+	<div id="login-box">
+
+		<h3>Login met Gebruikers-naam en Wachtwoord</h3>
+
+		<div th:if="${error}" class="error" th:text="#{loginerrormsg}"></div>
+
+		<div th:if="${msg}" class="msg" th:text="${msg}"></div>
+
+		<form th:action="@{/login}" method="post">
+			<table>
+				<tr>
+					<td>Naam:</td>
+					<td><input type='text' name='username' value=''></td>
+				</tr>
+				<tr>
+					<td>Wachtwoord:</td>
+					<td><input type='password' name='password' /></td>
+				</tr>
+				<tr>
+					<td colspan='2'><button class="firstBtn" name="submit" type="submit">Login</button></td>
+				</tr>
+			</table>
+
+			<input type="hidden" name="_csrf" th:value="${_csrf.token}" />
+
+		</form>
+	</div>
+	</div>
+
+</body>
+</html>
